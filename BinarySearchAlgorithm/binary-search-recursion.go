@@ -10,8 +10,8 @@ func binarySearchRecursion(array []int, target int, lowIndex int, highIndex int)
 	mid := int((lowIndex + highIndex) / 2)
 	if target < array[mid] {
 		return binarySearchRecursion(array, target, lowIndex, mid)
-	} else if target > array[mid+1] {
-		return binarySearchRecursion(array, target, mid, highIndex)
+	} else if target > array[mid] {
+		return binarySearchRecursion(array, target, mid+1, highIndex)
 	} else {
 		return mid
 	}

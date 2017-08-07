@@ -11,8 +11,8 @@ func binarySearchLoop(array []int, target int, lowIndex int, highIndex int) int 
 		mid := int((startIndex + endIndex) / 2)
 		if target < array[mid] {
 			endIndex = mid
-		} else if target > mid {
-			startIndex = mid + 1
+		} else if target > array[mid] {
+			startIndex = mid
 		} else {
 			return mid
 		}
