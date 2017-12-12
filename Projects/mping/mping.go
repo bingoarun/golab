@@ -34,24 +34,40 @@ func getRTT(ip string) time.Duration {
 	return rrtt
 }
 
-func main() {
-	args := os.Args[1:]
+func processAdd(table *tablewriter.Table, arg string) *tablewriter.Table {
 	data := [][]string{}
 	var data_item []string
 	data_item = make([]string, 2)
-	//data := make([][]string,3)
+	ip_rtt := getRTT(arg)
+	data_item[0] = string(arg)
+	data_item[1] = ip_rtt.String()
+	data = data[:0]
+	data = append(data, data_item)
+	for _, v := range data {
+		table.Append(v)
+	}
+	return table
+}
+func main() {
+	args := os.Args[1:]
+	//data := [][]string{}
+	//var data_item []string
+	//data_item = make([]string, 2)
+	////data := make([][]string,3)
 	table := tablewriter.NewWriter(os.Stdout)
 	table.SetHeader([]string{"IP", "RTT"})
 
 	for _, arg := range args {
-		ip_rtt := getRTT(arg)
-		data_item[0] = string(arg)
-		data_item[1] = ip_rtt.String()
-		data = data[:0]
-		data = append(data, data_item)
-		for _, v := range data {
-			table.Append(v)
-		}
+		//fmt.Println(reflect.TypeOf(table))
+		table = processAdd(table, arg)
+		//ip_rtt := getRTT(arg)
+		//data_item[0] = string(arg)
+		//data_item[1] = ip_rtt.String()
+		//data = data[:0]
+		//data = append(data, data_item)
+		//for _, v := range data {
+		//	table.Append(v)
+		//}
 
 	}
 	table.Render()
